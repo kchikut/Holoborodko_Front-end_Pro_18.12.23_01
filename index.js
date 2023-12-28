@@ -1,7 +1,4 @@
 function pow(num, degree) {
-    if (isNaN(num) || isNaN(degree)) {
-        return "Дані введено некоректно, спробуйте ще раз";
-    }
     if (degree === 0) {
         return 1;
     }
@@ -11,18 +8,22 @@ function pow(num, degree) {
     return num * pow(num, degree - 1);
 }
 
-let baseInput = prompt("Введіть число:");
-let exponentInput = prompt("Введіть ступінь:");
-if (baseInput.trim() === "" || exponentInput.trim() === "" || !Number.isInteger(+exponentInput)) {
-    alert("Помилка. Введіть значення для числа і ступеню.");
+const baseInput = prompt("Введіть число:");
+if (baseInput === null || baseInput.trim() === "" || isNaN(baseInput)) {
+    alert("Помилка. Введіть значення для числа.");
 }
 else {
-    let base = parseFloat(baseInput);
-    let exponent = parseFloat(exponentInput);
-    let result = pow(base, exponent);
-    if (typeof result === "number") {
-        alert(`Результат: ${result}`);
+    const exponentInput = prompt("Введіть ступінь:");
+    if (exponentInput === null || exponentInput.trim() === "" || !Number.isInteger(+exponentInput) || isNaN(exponentInput)) {
+        alert("Помилка. Введіть значення для ступеня.");
     } else {
-        alert(`Помилка: ${result}`);
+        const base = Number(baseInput);
+        const exponent = Number(exponentInput);
+        const result = pow(base, exponent);
+        if (typeof result === "number") {
+            alert(`Результат: ${result}`);
+        } else {
+            alert(`Помилка: ${result}`);
+        }
     }
 }
